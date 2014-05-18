@@ -1,0 +1,195 @@
+// Google Apps Script to render google-synced flightsheet .csv as a web page.
+// E. Woudenberg for GGC, May 2013.
+
+function doGet() {
+  return HtmlService.createHtmlOutput(getHTML())
+}
+
+function getHTML() {
+  file = getFlightSheetFile();
+  rows = importFromCSV(file);
+  page = genPage(rows);
+  return page;
+}
+
+function genPage(rows) {
+  var today = ''
+  for (var i in rows) 
+    if (rows[i].FltDate != null) {
+      today = Utilities.formatDate(rows[i].FltDate, Session.getTimeZone(), "yyyy-MM-dd");
+      break;
+    }
+  
+  page = '<html><head><title>GGC Flight Sheet</title>';
+  page += '<style type="text/css"> tr:nth-child(odd) { background-color:#eee; }; \
+           tr:nth-child(even) { background-color:#fff; } </style>';
+  page += '</head>';
+  page += '<body style="font-family: Arial, Helvetica, sans-serif;">';
+  page += '<h3>Geelong Gliding Club Flights for ' + today + '</h3>'; 
+  page += '<table cellpadding=3><tr><th>P1<th>P2<th>Glider<th>T/O<th>Tow<th>Flight</tr>';
+  for (var i in rows) {
+    o = rows[i];
+    page += Utilities.formatString('<tr><td> %s <td> %s <td> %s <td> %s <td align=right> %s <td align=right> %s </tr>',
+                                   o.P1Name, o.P2Name, o.Glider, o.TakeOff, o.TugDuration, o.GliderDuration);
+  }
+  page += '</table></body></html>'
+  return page;
+}
+
+function getFlightSheetFile() {
+  var a = getFolderFiles("FlightSheets", "FlightSheet_.*\.csv");
+  //var a = getFolderFiles("FlightSheets", "FlightSheet_20130428_Bacchus_Marsh.csv");
+  if (a.length == 0)
+    return null;
+  a.sort()
+  a.reverse()
+  return a[0];  
+}
+
+function getFolderFiles(foldername, glob) {
+  result = []
+  files = DocsList.getFolder(foldername).getFiles();
+  for (var i in files) {
+    if ( files[i].getName().match(glob) != null )
+      result.push(files[i]);
+  }
+  return result
+}
+
+var DateFields = ["GliderDown", "TugDown", "TakeOff", "FltDate"];
+
+function importFromCSV(file) {
+  var result = [];
+  csvFile = file.getContentAsString();
+  var csvData = CSVToArray(csvFile, ",");
+
+  for (var i = 1; i < csvData.length; i++) {
+    a = new Object();
+    for (var j = 0; j < csvData[0].length; j++) {
+      key = csvData[0][j];
+      a[key] = csvData[i][j];
+      if (DateFields.indexOf(key) != -1 && a[key] != null)
+        a[key] = parseIsoDate(a[key]);
+      if (a[key] == null)
+        a[key] = '';
+      if (key == 'TugDuration' && a[key] == '0')
+        a[key] = '';
+      if (key == 'TakeOff') {
+        takeoff = ''
+        newDate = new Date();
+        if (typeof a[key] == typeof newDate)
+          takeoff = Utilities.formatDate(a[key], Session.getTimeZone(), "HH:mm:ss");
+        a[key] = takeoff;
+      }
+    }
+    result.push(a);
+  }
+  result.sort(
+    function(a,b) { 
+      if (a.TakeOff < b.TakeOff) return -1;
+      if (a.TakeOff > b.TakeOff) return 1;
+      return 0;
+    } 
+  );
+  return result;
+}
+
+// Converts from YYYY-MM-DD HH:MM:SS to MM/DD/YYYY HH:MM:SS
+// then parses that into a Date object and returns it.
+
+function parseIsoDate(isoDate) {
+  // Can't believe google doesn't handle ISO dates
+  usaDate = isoDate.substring(5,7) + '/' + isoDate.substring(8,10) + '/' + isoDate.substring(0,4);
+  usaDate += ' ' + isoDate.substring(11,19);
+  unixTime = Date.parse(usaDate);
+  newDate = new Date();
+  newDate.setTime(unixTime);
+  return newDate;
+}
+
+// http://www.bennadel.com/blog/1504-Ask-Ben-Parsing-CSV-Strings-With-Javascript-Exec-Regular-Expression-Command.htm
+// This will parse a delimited string into an array of
+// arrays. The default delimiter is the comma, but this
+// can be overriden in the second argument.
+
+function CSVToArray( strData, strDelimiter ){
+  // Check to see if the delimiter is defined. If not,
+  // then default to comma.
+  strDelimiter = (strDelimiter || ",");
+
+  // Create a regular expression to parse the CSV values.
+  var objPattern = new RegExp(
+    (
+      // Delimiters.
+      "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+
+      // Quoted fields.
+      "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+
+      // Standard fields.
+      "([^\"\\" + strDelimiter + "\\r\\n]*))"
+    ),
+    "gi"
+  );
+
+
+  // Create an array to hold our data. Give the array
+  // a default empty first row.
+  var arrData = [[]];
+
+  // Create an array to hold our individual pattern
+  // matching groups.
+  var arrMatches = null;
+
+
+  // Keep looping over the regular expression matches
+  // until we can no longer find a match.
+  while (arrMatches = objPattern.exec( strData )){
+
+    // Get the delimiter that was found.
+    var strMatchedDelimiter = arrMatches[ 1 ];
+
+    // Check to see if the given delimiter has a length
+    // (is not the start of string) and if it matches
+    // field delimiter. If id does not, then we know
+    // that this delimiter is a row delimiter.
+    if (
+      strMatchedDelimiter.length &&
+      (strMatchedDelimiter != strDelimiter)
+    ){
+
+      // Since we have reached a new row of data,
+      // add an empty row to our data array.
+      arrData.push( [] );
+
+    }
+
+
+    // Now that we have our delimiter out of the way,
+    // let's check to see which kind of value we
+    // captured (quoted or unquoted).
+    if (arrMatches[ 2 ]){
+
+      // We found a quoted value. When we capture
+      // this value, unescape any double quotes.
+      var strMatchedValue = arrMatches[ 2 ].replace(
+        new RegExp( "\"\"", "g" ),
+        "\""
+      );
+
+    } else {
+
+      // We found a non-quoted value.
+      var strMatchedValue = arrMatches[ 3 ];
+
+    }
+
+
+    // Now that we have our value string, let's add
+    // it to the data array.
+    arrData[ arrData.length - 1 ].push( strMatchedValue );
+  }
+
+  // Return the parsed data.
+  return( arrData );
+}

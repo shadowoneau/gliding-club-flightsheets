@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FlightSheetSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <FlightSheetsFolder>C:\Users\eric\Desktop\2013-01-26</FlightSheetsFolder>
+  <BackupsFolder>C:\Users\eric\Desktop\2013-04-01</BackupsFolder>
+  <GridFontSize>1</GridFontSize>
+  <TowAlarmThreshold>10</TowAlarmThreshold>
+  <Airfield>Bacchus Marsh</Airfield>
+  <TugButtons>SSO,MSA,TNC,WGG</TugButtons>
+  <GliderButtons>GPZ,OWL,XOC,GHE</GliderButtons>
+</FlightSheetSettings>

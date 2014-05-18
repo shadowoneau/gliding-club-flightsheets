@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightSheet", "GGC_FlightSheet\FlightSheet.csproj", "{5FEB008A-F17B-47AC-8881-BE965D297039}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileHelpers.2005", "FileHelpers_source\FileHelpers.2005.csproj", "{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FEB008A-F17B-47AC-8881-BE965D297039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FEB008A-F17B-47AC-8881-BE965D297039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FEB008A-F17B-47AC-8881-BE965D297039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FEB008A-F17B-47AC-8881-BE965D297039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,5 @@
+   checkbox to Hide finished flights
+x  dynamically load tug and glider buttons from config file
+   smaller flight entry dialog for 600 vertical pixel netbooks
+x  buttons instead of double-click for entry of takeoff and landing times from grid
+

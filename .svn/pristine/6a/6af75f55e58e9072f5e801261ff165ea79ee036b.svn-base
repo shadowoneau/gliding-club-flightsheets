@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file was created by NSISDialogDesigner 1.1.2.0
+http://coolsoft.altervista.org/nsisdialogdesigner
+Do not edit manually!
+-->
+<Dialog Name="GFSinstaller" Title="GGC Flight Sheets Install" Subtitle="Flight Sheets Folder Selection" Style="none" ExStyle="none">
+  <FooterCustomScript>Function fnc_GFSinstaller_Leave
+  ${NSD_GetText} $hCtl_GFSinstaller_DirRequest2_Txt $R0
+FunctionEnd</FooterCustomScript>
+  <Label Name="Label3" Location="12, 55" Size="433, 22" Text="Specify where the flight sheet files will be kept:" Font="Microsoft Sans Serif, 12pt" TabIndex="3" Style="none" ExStyle="none" />
+  <DirRequest Name="DirRequest2" Location="12, 93" Size="433, 29" Text="$Desktop\GGC_FlightSheets" Font="Microsoft Sans Serif, 9.75pt" TabIndex="4" ButtonText="Browse" ButtonWidth="70" Style="none" ExStyle="none" />
+</Dialog>

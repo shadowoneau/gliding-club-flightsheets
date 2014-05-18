@@ -1,0 +1,3 @@
+FltDate,FltSheetRef,FltNo,Place,P1Name,P1MemID,P2Name,P2MemID,Tug,Glider,TakeOff,TugDown,GliderDown,GliderDuration,TugDuration,FltShtType,Mutual,TIFType,AnnualChk1,AnnualChk2,AnnualChkOK,Solo,Kms,AltPay1,AltPay1MemID,AltPay2,AltPay2MemID,AltPayAll,AltPayAllMemID,Notes,ImpExpFlag,Clerk
+"2013-04-14 01:03:02","","1","Bacchus Marsh","","","","","","","","","","","","","","","","","","","","","","","","","","","","abc"
+"2013-04-14 01:03:07","","0","Bacchus Marsh","","","","","","","","","","","","","","","","","","","","","","","","","","","",""

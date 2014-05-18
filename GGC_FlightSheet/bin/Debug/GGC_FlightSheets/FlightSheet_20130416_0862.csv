@@ -1,0 +1,5 @@
+FltDate,FltSheetRef,FltNo,Place,P1Name,P1MemID,P2Name,P2MemID,Tug,Glider,TakeOff,TugDown,GliderDown,GliderDuration,TugDuration,FltShtType,Mutual,TIFType,AnnualChk1,AnnualChk2,AnnualChkOK,Solo,Kms,AltPay1,AltPay1MemID,AltPay2,AltPay2MemID,AltPayAll,AltPayAllMemID,Notes,ImpExpFlag,Clerk
+"2013-04-16 07:41:31","","7","0862","McMillan, Ailsa","M334","Rajch, Ales","A306","MSA Super Cub","OWL Puchacz","","","","","","","","0 ","","","","","","","","","","","","","","Adam Henderson"
+"2013-04-16 07:38:07","","4","0862","McMillan, Ailsa","M334","Rajch, Ales","A306","MSA Super Cub","OWL Puchacz","2013-04-17 00:00:59","","","-452","-452","","","0 ","","","","","","","","","","","","","","Buchner, Abel-John"
+"2013-04-16 00:59:42","","2","0862","McMillan, Ailsa","M334","Rajch, Ales","A306","MSA Super Cub","OWL Puchacz","2013-04-16 00:59:30","2013-04-16 01:05:00","2013-04-16 07:43:15","404","6","","","0 ","","","","","","","","","","","","","","Raynor, Aaron"
+"2013-04-16 07:41:27","","6","0862","Raynor, Aaron","R321","Dean, Alan","D008","SSO Pawnee","OWL Puchacz","","","","","","","","0 ","","","","","","","","","","","","","","Adam Henderson"

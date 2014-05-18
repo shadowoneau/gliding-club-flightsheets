@@ -1,0 +1,36 @@
+These are the sources for GGC_Flightsheets.
+
+Notes:
+
+1) This is intended to be built with the Microsoft's free Visual Studio Express 2012
+   Download: http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products
+
+2) FileHelpers is a pretty big package just for reading .csv files. On
+   the other hand, it works well. I did modify the source slightly:
+
+    diff -r  Original/FileHelpers_Source/FileHelpers/Converters/ConvertHelpers.cs \
+    	       ../GGC_FlightSheet/FileHelpers_source/Converters/ConvertHelpers.cs
+    398c398,401
+    <                               return Convert.ToDateTime(from).ToString(mFormat);
+    ---
+    >                 if (from == null)
+    >                     return "";
+    >                 else
+    >                                   return Convert.ToDateTime(from).ToString(mFormat);
+
+3) I use the NSIS installer builder with the XML NSIS plugin v2.0 for creating the installer:
+   http://nsis.sf.net
+   http://nsis.sourceforge.net/XML_plug-in
+
+How to Build:
+
+1) In VS 2012: Build->Build Solution
+
+2) From (Cygwin command line): cd Installer; ./make.sh 1.0.15 (or whatever the next version is).
+
+   GGC_FlightSheetsInstaller_1.0.15.exe (e.g.) will be generated. 
+
+
+
+
+

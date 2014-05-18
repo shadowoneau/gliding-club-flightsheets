@@ -1,0 +1,12 @@
+C:\Users\eric\Desktop\GGC\Release\DotNet 2.0\FileHelpers.dll
+C:\Users\eric\Desktop\GGC\Release\DotNet 2.0\FileHelpers.pdb
+C:\Users\eric\Desktop\GGC\Release\DotNet 2.0\FileHelpers.xml
+C:\Users\eric\Desktop\GGC\GGC_FlightSheet\FileHelpers_source\obj\Debug\FileHelpers.dll
+C:\Users\eric\Desktop\GGC\GGC_FlightSheet\FileHelpers_source\obj\Debug\FileHelpers.pdb
+C:\Users\eric\Desktop\GGC\GGC_FlightSheet\FileHelpers_source\obj\Debug\FileHelpers.2005.csprojResolveAssemblyReference.cache
+C:\Users\eric\Desktop\Gliding\GGC\Release\DotNet 2.0\FileHelpers.dll
+C:\Users\eric\Desktop\Gliding\GGC\Release\DotNet 2.0\FileHelpers.pdb
+C:\Users\eric\Desktop\Gliding\GGC\Release\DotNet 2.0\FileHelpers.xml
+C:\Users\eric\Desktop\Gliding\GGC\GGC_FlightSheet\FileHelpers_source\obj\Debug\FileHelpers.dll
+C:\Users\eric\Desktop\Gliding\GGC\GGC_FlightSheet\FileHelpers_source\obj\Debug\FileHelpers.pdb
+C:\Users\eric\Desktop\Gliding\GGC\GGC_FlightSheet\FileHelpers_source\obj\Debug\FileHelpers.2005.csprojResolveAssemblyReference.cache

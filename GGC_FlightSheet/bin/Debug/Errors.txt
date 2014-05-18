@@ -1,0 +1,4 @@
+FileHelpers - Errors Saved at Friday, May 16, 2014 3:09:15 PM
+LineNumber | LineString |ErrorDescription
+1|"0","",""|Null Value found for the field 'Rate' in the class 'AefType'. You must specify a FieldNullValue attribute because this is a ValueType and can´t be null or you can use the Nullable Types feature of the .NET framework.
+8|"1","Other",""|Null Value found for the field 'Rate' in the class 'AefType'. You must specify a FieldNullValue attribute because this is a ValueType and can´t be null or you can use the Nullable Types feature of the .NET framework.

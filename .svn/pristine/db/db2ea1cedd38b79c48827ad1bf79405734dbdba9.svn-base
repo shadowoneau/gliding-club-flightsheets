@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5FEB008A-F17B-47AC-8881-BE965D297039}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>au.org.GGC</RootNamespace>
+    <AssemblyName>GGC_FlightSheet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NPOI, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>NPOI\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBoxDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBoxDialog.Designer.cs">
+      <DependentUpon>AboutBoxDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AircraftSummaries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AircraftSummaries.Designer.cs">
+      <DependentUpon>AircraftSummaries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationRunningHelper.cs" />
+    <Compile Include="ChangeAirfieldDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeAirfieldDialog.Designer.cs">
+      <DependentUpon>ChangeAirfieldDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExcelAircraftSheet.cs" />
+    <Compile Include="Csv.cs" />
+    <Compile Include="CustomSettings.cs" />
+    <Compile Include="ExcelFlightSheet.cs" />
+    <Compile Include="Flight.cs" />
+    <Compile Include="FlightEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FlightEditor.Designer.cs">
+      <DependentUpon>FlightEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlightComparer.cs" />
+    <Compile Include="FlightSheetSettings.cs" />
+    <Compile Include="HelpSheet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelpSheet.Designer.cs">
+      <DependentUpon>HelpSheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsDialog.Designer.cs">
+      <DependentUpon>SettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArchivedSheetSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArchivedSheetSelector.Designer.cs">
+      <DependentUpon>ArchivedSheetSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GGC_FlightSheet.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SafeInvoke.cs" />
+    <EmbeddedResource Include="AboutBoxDialog.resx">
+      <DependentUpon>AboutBoxDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AircraftSummaries.resx">
+      <DependentUpon>AircraftSummaries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeAirfieldDialog.resx">
+      <DependentUpon>ChangeAirfieldDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlightEditor.resx">
+      <DependentUpon>FlightEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelpSheet.resx">
+      <DependentUpon>HelpSheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsDialog.resx">
+      <DependentUpon>SettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArchivedSheetSelector.resx">
+      <DependentUpon>ArchivedSheetSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Content Include="NPOI\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="NPOI\NPOI.DDF.dll" />
+    <Content Include="NPOI\NPOI.DDF.xml" />
+    <Content Include="NPOI\NPOI.dll" />
+    <Content Include="NPOI\NPOI.HPSF.dll" />
+    <Content Include="NPOI\NPOI.HPSF.xml" />
+    <Content Include="NPOI\NPOI.HSSF.dll" />
+    <Content Include="NPOI\NPOI.HSSF.XML" />
+    <Content Include="NPOI\NPOI.POIFS.dll" />
+    <Content Include="NPOI\NPOI.POIFS.xml" />
+    <Content Include="NPOI\NPOI.Util.dll" />
+    <Content Include="NPOI\NPOI.Util.xml" />
+    <Content Include="NPOI\NPOI.xml" />
+    <Content Include="programdata\aircraft.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="programdata\GGCLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="programdata\pilots.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="programdata\airfields.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="programdata\aeftypes.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="programdata\GGC_Flight_Sheet_Documentation.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="programdata\GGC_Flight_Sheet_Documentation.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="programdata\flightsheet_excel_template.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="programdata\aircraft_sheet_excel_template.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileHelpers_source\FileHelpers.2005.csproj">
+      <Project>{eb8633ff-ceed-40ee-8d1a-ca1bf5678c42}</Project>
+      <Name>FileHelpers.2005</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="programdata\logo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="programdata\piecart.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

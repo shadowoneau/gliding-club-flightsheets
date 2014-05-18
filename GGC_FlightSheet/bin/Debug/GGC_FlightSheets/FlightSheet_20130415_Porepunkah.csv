@@ -1,0 +1,2 @@
+FltDate,FltSheetRef,FltNo,Place,P1Name,P1MemID,P2Name,P2MemID,Tug,Glider,TakeOff,TugDown,GliderDown,GliderDuration,TugDuration,FltShtType,Mutual,TIFType,AnnualChk1,AnnualChk2,AnnualChkOK,Solo,Kms,AltPay1,AltPay1MemID,AltPay2,AltPay2MemID,AltPayAll,AltPayAllMemID,Notes,ImpExpFlag,Clerk
+"2013-04-15 00:14:13","4567","1","Porepunkah","Szemmanis, A","S023","Henderson, Adam","H334","GGK RF-5","GHO ASK-2","2013-04-15 00:14:37","2013-04-15 13:25:54","2013-04-15 13:25:57","791","791","","","0 ","","","","","","","","","","","","","","Raynor, Aaron"
