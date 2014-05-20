@@ -191,23 +191,26 @@ namespace au.org.GGC {
         // Estimates the cost of each flight
         public String Est {
             get {
-                int tug = 0, glider = 0;
-                if (Csv.AircraftDict.ContainsKey(TugRego)) {
-                    tug = Csv.AircraftDict[TugRego].Rate;
-                    if (Csv.AircraftDict[TugRego].Type != "w")
-                        tug *= TowMinutes;
-                }
-                if (Csv.AircraftDict.ContainsKey(GliderRego))
-                    glider = Math.Min(FlightMinutes, Max_Flight_Minutes) * Csv.AircraftDict[GliderRego].Rate;
-                var cost = tug + glider;
+                int cost = 0;
+                if (Csv.Instance.IsClubMember(Pilot1ID) || Csv.Instance.IsClubMember(Pilot2ID)) {
+                    int tug = 0, glider = 0;
+                    if (Csv.AircraftDict.ContainsKey(TugRego)) {
+                        tug = Csv.AircraftDict[TugRego].Rate;
+                        if (!Csv.Instance.IsWinch(TugRego))
+                            tug *= TowMinutes;
+                    }
+                    if (Csv.AircraftDict.ContainsKey(GliderRego))
+                        glider = Math.Min(FlightMinutes, Max_Flight_Minutes) * Csv.AircraftDict[GliderRego].Rate;
+                    cost = tug + glider;
 
-                if (AEFType != null) {
-                    var aefkey = Displayable.DisplayToKey(Csv.AefTypesList, AEFType);
-                    if (Csv.AefTypeDict.ContainsKey(aefkey)) {
-                        if (aefkey == "2")
-                            cost += Csv.AefTypeDict[aefkey].Rate;
-                        else if (Csv.AefTypeDict[aefkey].Rate != 0)
-                            cost = Csv.AefTypeDict[aefkey].Rate;
+                    if (AEFType != null) {
+                        var aefkey = Displayable.DisplayToKey(Csv.AefTypesList, AEFType);
+                        if (Csv.AefTypeDict.ContainsKey(aefkey)) {
+                            if (aefkey == "2")
+                                cost += Csv.AefTypeDict[aefkey].Rate;
+                            else if (Csv.AefTypeDict[aefkey].Rate != 0)
+                                cost = Csv.AefTypeDict[aefkey].Rate;
+                        }
                     }
                 }
                 if (cost == 0)

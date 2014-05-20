@@ -31,7 +31,7 @@ namespace au.org.GGC {
         public static Dictionary<String, AefType> AefTypeDict; // Indexed by type code
 
         public string GetAircraftType(string reg) {
-            return AircraftDict.ContainsKey(reg) ? AircraftDict[reg].Type : "";
+            return AircraftDict.ContainsKey(reg) ? AircraftDict[reg].Type.ToLower() : "";
         }
 
         public bool IsWinch(string regPlusName) {
@@ -235,6 +235,10 @@ namespace au.org.GGC {
             get {
                 return CustomProperties<FlightSheetSettings>.Settings.Default.FlightSheetsFolder;
             }
+        }
+
+        internal bool IsClubMember(string PilotID) {
+            return PilotID != null && PilotDict.ContainsKey(PilotID) && PilotDict[PilotID].Club == CLubInitials;
         }
     }
 

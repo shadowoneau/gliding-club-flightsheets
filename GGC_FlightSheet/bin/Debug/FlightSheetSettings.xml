@@ -2,7 +2,7 @@
 <FlightSheetSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <FlightSheetsFolder>C:\Users\eric\Desktop\Gliding\GGC Google Drive Copy</FlightSheetsFolder>
   <BackupsFolder>C:\tmp</BackupsFolder>
-  <GridFontSize>2</GridFontSize>
+  <GridFontSize>1</GridFontSize>
   <TowAlarmThreshold>10</TowAlarmThreshold>
   <Airfield>Bacchus Marsh</Airfield>
   <TugButtons>SSO,MSA,WGG,TNC,BCK</TugButtons>
