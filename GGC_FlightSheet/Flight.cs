@@ -25,6 +25,7 @@ namespace au.org.GGC {
         }
         public bool IsEmpty { get { return FlightNo == null; } }
         public String Edit { get { return IsEmpty ? "New" : "Edit"; } }
+        public bool Undelete { get; set; }
         public int? FlightNo { get; set; }
         public DateTime? Logged { get; set; }
         public String Pilot1 { get; set; }
@@ -191,6 +192,8 @@ namespace au.org.GGC {
         // Estimates the cost of each flight
         public String Est {
             get {
+                if (IsEmpty)
+                    return "";
                 int cost = 0;
                 if (Csv.Instance.IsClubMember(Pilot1ID) || Csv.Instance.IsClubMember(Pilot2ID)) {
                     int tug = 0, glider = 0;
@@ -212,6 +215,8 @@ namespace au.org.GGC {
                                 cost = Csv.AefTypeDict[aefkey].Rate;
                         }
                     }
+                } else {
+                    return "non/club";
                 }
                 if (cost == 0)
                     return "";

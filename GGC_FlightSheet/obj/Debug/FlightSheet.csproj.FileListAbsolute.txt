@@ -79,3 +79,5 @@ C:\Users\eric\Desktop\Gliding\GGC\GGC_FlightSheet\GGC_FlightSheet\bin\Debug\prog
 C:\Users\eric\Desktop\Gliding\GGC\GGC_FlightSheet\GGC_FlightSheet\obj\Debug\au.org.GGC.ChangeFieldAndDateDialog.resources
 C:\Users\eric\Desktop\Gliding\GGC\GGC_FlightSheet\GGC_FlightSheet\obj\Debug\au.org.GGC.AircraftSummaries.resources
 C:\Users\eric\Desktop\Gliding\GGC\GGC_FlightSheet\GGC_FlightSheet\bin\Debug\programdata\aircraft_sheet_excel_template.xls
+C:\Users\eric\Desktop\Gliding\GGC\GGC_FlightSheet\GGC_FlightSheet\obj\Debug\au.org.GGC.LoginDialog.resources
+C:\Users\eric\Desktop\Gliding\GGC\GGC_FlightSheet\GGC_FlightSheet\obj\Debug\au.org.GGC.UndeleteFlightForm.resources

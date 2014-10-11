@@ -40,6 +40,20 @@ namespace au.org.GGC {
             }
         }
 
+        void Login() {
+            if (!IsSheetEmpty())
+                return;
+            LoginDialog login = new LoginDialog();
+            DialogResult result = login.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.Cancel)
+                return;
+            PersistedAirfield = login.Airfield;
+            LoadFromCsv(GetAirfieldFilename(PersistedAirfield, login.DateString));
+            comboBoxClerk.SelectedIndex = -1;
+            comboBoxClerk.SelectedText = login.Clerk;
+            comboBoxClerk.Text = login.Clerk;
+        }
+
         void InitSheet() {
             SetLogo();
             InitColumns();
@@ -48,6 +62,7 @@ namespace au.org.GGC {
             SetupClerkBox();
             StartWallClock();
             LoadFromCsv(GetTodaysAirfieldFilename());
+            Login();
             // Windows XP doesn't have the Unicode <- character.
             if (Environment.OSVersion.Version.Major < 6) {
                 labelClerkAlert.Text = "<< Your Name Please?";
@@ -152,10 +167,21 @@ namespace au.org.GGC {
         }
 
         int GetNextFlightNumber() {
-            if (Flights.Count == 0)
-                return 1;
+            return 1 + Math.Max(GetMaxFlightNumber(Flights), GetMaxFlightNumber(DeletedFlights));
+        }
+
+        int GetMaxFlightNumber(List<Flight> flights) {
+            if (flights.Count == 0)
+                return 0;
             else
-                return Flights.Max(f => f.IsEmpty ? 0 : (int)f.FlightNo) + 1;
+                return flights.Max(f => f.IsEmpty ? 0 : (int)f.FlightNo);
+        }
+
+        int GetMaxFlightNumber(SortableBindingList<Flight> flights) {
+            if (flights.Count == 0)
+                return 0;
+            else
+                return flights.Max(f => f.IsEmpty ? 0 : (int)f.FlightNo);
         }
 
         void SetupClerkBox() {
@@ -227,7 +253,10 @@ namespace au.org.GGC {
             }
         }
 
+        List<Flight> DeletedFlights = new List<Flight>();
+
         void RemoveFlight(int index) {
+            DeletedFlights.Add(Flights[index]);
             Flights.RemoveAt(index);
             Save();
         }
@@ -264,11 +293,11 @@ namespace au.org.GGC {
             FixCombo((ComboBox)sender, Csv.Instance.LoadPilotsList(isMember: true));
         }
 
-        void FixCombo(ComboBox c, List<Displayable> list) {
+        static public void FixCombo(ComboBox c, List<Displayable> list) {
             FixCombo(c, list, c.Text);
         }
 
-        void FixCombo(ComboBox c, List<Displayable> list, string text) {
+        static public void FixCombo(ComboBox c, List<Displayable> list, string text) {
             string prefix = text.ToLower();
             foreach (Displayable s in list) {
                 if (s.DisplayName.ToLower().StartsWith(prefix)) {
@@ -741,14 +770,53 @@ namespace au.org.GGC {
         }
 
         private void buttonChangeAirfield_Click(object sender, EventArgs e) {
-            var changeForm = new ChangeFieldAndDateDialog(PersistedAirfield, FlightSheetDate);
+            var changeForm = new ChangeFieldAndDateDialog(PersistedAirfield, FlightSheetDate, IsSheetEmpty());
             var result = changeForm.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK) {
-                if (PersistedAirfield != changeForm.Airfield || FlightSheetDate != changeForm.Date) {
+                if (PersistedAirfield != changeForm.Airfield || FlightSheetDate != changeForm.DateString) {
+                    List<Flight> saved = new List<Flight>();
+                    if (changeForm.MoveFlights) {
+                        saved.AddRange(Flights.Where(f => !f.IsEmpty));
+                        Flights.Clear();
+                        SaveToCsv();
+                    }
                     PersistedAirfield = changeForm.Airfield;
-                    LoadFromCsv(GetAirfieldFilename(PersistedAirfield, changeForm.Date));
+                    LoadFromCsv(GetAirfieldFilename(PersistedAirfield, changeForm.DateString));
+                    if (changeForm.MoveFlights) {
+                        foreach (Flight flight in saved)
+                            MergeFlightOntoSheet(flight, changeForm.Date);
+                        Save();
+                    }
                 }
             }
+        }
+
+        private void MergeFlightOntoSheet(Flight flight, DateTime newdate) {
+            flight.TakeOff = transferDate(flight.TakeOff, newdate);
+            flight.TugDown = transferDate(flight.TugDown, newdate);
+            flight.GliderDown = transferDate(flight.GliderDown, newdate);
+            flight.Logged = transferDate(flight.Logged, newdate);
+            flight.FlightNo = GetNextFlightNumber();
+            Flights.Insert(NewFlightInsertionPoint, flight);
+        }
+
+        private Int32 NewFlightInsertionPoint {
+            get {
+                for (int i = 0; i < Flights.Count; i++)
+                    if (Flights[i].IsEmpty)
+                        return i;
+                return 0;
+            }
+        }
+
+        private DateTime? transferDate(DateTime? oldtime, DateTime newdate) {
+            DateTime? newtime = null;
+            if (oldtime != null) {
+                DateTime oldtimevalue = oldtime.Value;
+                return new DateTime(newdate.Year, newdate.Month, newdate.Day,
+                                              oldtimevalue.Hour, oldtimevalue.Minute, oldtimevalue.Second);
+            }
+            return newtime;
         }
 
         // Selection-related grid operations
@@ -840,6 +908,8 @@ namespace au.org.GGC {
             foreach (ToolStripItem item in editToolStripMenuItem.DropDownItems)
                 if (new string[] { "delete", "edit", "duplicate" }.Contains(item.Tag))
                     item.Enabled = validSelection;
+
+            editToolStripMenuItem.DropDownItems["reinstateADeletedFlightToolStripMenuItem"].Enabled = DeletedFlights.Count != 0;
         }
 
         private void editToolStripMenuItem_DropDownClosed(object sender, EventArgs e) {
@@ -1063,17 +1133,17 @@ namespace au.org.GGC {
             }
         }
 
-        void ShowChangeAirfieldToolTip() {
-            if (Flights.Count <= 1) {
+        void ShowChangeClerkTookTip() {
+            if (comboBoxClerk.SelectedIndex == 0) {
                 ToolTip tooltip = new ToolTip();
                 tooltip.IsBalloon = true;
-                tooltip.Show(String.Format("If you are not at {0}\nclick this button to change the airfield.", PersistedAirfield),
-                    buttonChangeAirfield, 15,-53, 10000);
+                tooltip.Show(String.Format("Please input your name here"),
+                    comboBoxClerk, 15,-53, 10000);
             }
         }
 
         private void MainForm_Shown(object sender, EventArgs e) {
-            ShowChangeAirfieldToolTip();
+            ShowChangeClerkTookTip();
         }
 
         private void aircraftTimeSummaryToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -1083,6 +1153,17 @@ namespace au.org.GGC {
         private void helpToolStripMenuItem_Click(object sender, EventArgs e) {
             aboutGGCFlightSheetsToolStripMenuItem.Text = "About GGC Flightsheets Version " +
                 Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        }
+
+        private void reinstateADeletedFlightToolStripMenuItem_Click(object sender, EventArgs e) {
+            UndeleteFlightForm deletes = new UndeleteFlightForm(DeletedFlights, PersistedGridFontSize);
+            deletes.ShowDialog();
+            foreach (Flight flight in deletes.UndeletedFlights)
+                Flights.Add(flight);
+            Flight f = new Flight();
+            PropertyDescriptor flightno = TypeDescriptor.GetProperties(f).Find("Flightno", true);
+            Flights.ApplySort(flightno, ListSortDirection.Ascending);
+            Save();
         }
     }
 }

@@ -110,6 +110,10 @@ namespace au.org.GGC {
             get { return true; }
         }
 
+        public void ApplySort(PropertyDescriptor property, ListSortDirection direction) {
+            ApplySortCore(property, direction);
+        }
+
         protected override void ApplySortCore(PropertyDescriptor property, ListSortDirection direction) {
             List<T> itemsList = (List<T>)this.Items;
 

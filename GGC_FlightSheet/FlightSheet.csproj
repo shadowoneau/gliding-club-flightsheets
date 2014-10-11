@@ -70,6 +70,12 @@
     <Compile Include="ChangeAirfieldDialog.Designer.cs">
       <DependentUpon>ChangeAirfieldDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginDialog.Designer.cs">
+      <DependentUpon>LoginDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExcelAircraftSheet.cs" />
     <Compile Include="Csv.cs" />
     <Compile Include="CustomSettings.cs" />
@@ -95,6 +101,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UndeleteFlightForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UndeleteFlightForm.Designer.cs">
+      <DependentUpon>UndeleteFlightForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +131,9 @@
     <EmbeddedResource Include="ChangeAirfieldDialog.resx">
       <DependentUpon>ChangeAirfieldDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LoginDialog.resx">
+      <DependentUpon>LoginDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FlightEditor.resx">
       <DependentUpon>FlightEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -128,6 +143,9 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UndeleteFlightForm.resx">
+      <DependentUpon>UndeleteFlightForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsDialog.resx">
       <DependentUpon>SettingsDialog.cs</DependentUpon>

@@ -39,7 +39,7 @@ namespace au.org.GGC {
                 Flight f = flight.Clone();
                 Flights.Add(f);
             }
-            return Flights;
+            return Flights.OrderBy(f => f.TakeOff).ToList();
         }
 
         void CreateCell(IRow row, String column, dynamic value) {
